@@ -3,6 +3,7 @@
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { mailtoInquiry } from '@/data/contact'
+import { business } from '@/data/site'
 
 const route = useRoute()
 const router = useRouter()
@@ -57,7 +58,7 @@ const links = [
         :class="solid ? 'text-rosedust' : 'text-cream'"
         @click="open = false"
       >
-        Beautifully Invited
+        {{ business.name }}
       </RouterLink>
 
       <!-- Desktop nav -->

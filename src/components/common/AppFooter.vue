@@ -1,13 +1,14 @@
 <!-- Slim site-wide footer (text contact links — walang duplicate na CTA buttons). -->
 <script setup>
 import { contact, mailtoInquiry } from '@/data/contact'
+import { business } from '@/data/site'
 </script>
 
 <template>
   <footer class="border-t border-sage/20 bg-cream text-bark">
     <div class="mx-auto max-w-5xl px-6 py-12 text-center">
-      <p class="font-script text-3xl text-rosedust">Beautifully Invited</p>
-      <p class="mt-2 text-sm text-bark/65">Digital invitations &amp; live RSVP websites</p>
+      <p class="font-script text-3xl text-rosedust">{{ business.name }}</p>
+      <p class="mt-2 text-sm text-bark/65">{{ business.tagline }}</p>
 
       <div class="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
         <a
@@ -33,7 +34,7 @@ import { contact, mailtoInquiry } from '@/data/contact'
         </a>
       </div>
 
-      <p class="mt-6 text-xs text-bark/40">© 2026 Beautifully Invited. All rights reserved.</p>
+      <p class="mt-6 text-xs text-bark/40">© 2026 {{ business.name }}. All rights reserved.</p>
     </div>
   </footer>
 </template>

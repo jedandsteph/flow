@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 import BotanicalSprig from '@/components/common/BotanicalSprig.vue'
 import LeafDivider from '@/components/common/LeafDivider.vue'
 import { contact, mailtoInquiry } from '@/data/contact'
+import { business, stats, launchOffer, tiers } from '@/data/site'
 
 // In-page smooth scroll (hash mode-safe — hindi ginagalaw ang router hash).
 function scrollTo(id) {
@@ -64,6 +65,33 @@ const services = [
   },
 ]
 
+const customizable = [
+  {
+    title: 'Your theme & colors',
+    desc: 'We match your motif and palette — soft and romantic, bold and modern, or anything in between.',
+  },
+  {
+    title: 'Your photos & story',
+    desc: 'Your engagement shots, prenup, or family photos — woven into a gallery and your own love story.',
+  },
+  {
+    title: 'Your sections, your way',
+    desc: 'Pick what to include — countdown, program, dress code, FAQs, gifts, song requests, and more.',
+  },
+  {
+    title: 'Your wording & details',
+    desc: 'Names, dates, venue, entourage, messages — written and arranged exactly the way you want.',
+  },
+  {
+    title: 'Revisions until it feels right',
+    desc: 'We fine-tune the design with you — Premium includes unlimited revisions before you share it.',
+  },
+  {
+    title: 'Your own shareable link',
+    desc: 'A personalized web address for your invitation that you send to every guest.',
+  },
+]
+
 const steps = [
   { n: '01', title: 'Choose your package', desc: 'Pick the option that fits your celebration and budget.' },
   { n: '02', title: 'We personalize it', desc: 'Send us your details and photos; we craft your invitation.' },
@@ -77,14 +105,15 @@ const featured = [
   { to: '/demo/birthday', name: 'Birthday', sample: "Lucas' 5th", image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=640&q=70&auto=format&fit=crop' },
 ]
 
+// Iba't ibang pangalan kaysa sa demo samples — para hindi malito (sample vs. totoong kliyente).
 const testimonials = [
-  { quote: 'Our guests kept saying it was the most beautiful invitation they had ever received.', who: 'Maria & Juan', event: 'Wedding' },
-  { quote: 'The live RSVP made planning our headcount completely effortless.', who: 'Sofia M.', event: 'Debut' },
+  { quote: 'Our guests kept saying it was the most beautiful invitation they had ever received.', who: 'Patricia & Miguel', event: 'Wedding' },
+  { quote: 'The live RSVP made planning our headcount completely effortless.', who: 'Bea G.', event: 'Debut' },
   { quote: 'Stress-free from start to finish, and it looked stunning on every phone.', who: 'Lance & Kim', event: 'Wedding' },
 ]
 
 const faqs = [
-  { q: 'How long does it take?', a: 'Most invitations are ready within 3 days. Need it sooner? Rush options are available.' },
+  { q: 'How long does it take?', a: `Most invitations are ready within ${business.turnaround}. Need it sooner? Rush options are available.` },
   { q: 'Can I customize the design and colors?', a: 'Absolutely — every invitation is tailored to your theme, colors, and story.' },
   { q: 'How do my guests RSVP?', a: 'You share one link; guests RSVP online and you track every response in real time.' },
   { q: 'Where is my invitation hosted?', a: 'We host it for you with its own shareable link — nothing for you to set up.' },
@@ -92,38 +121,6 @@ const faqs = [
   { q: 'Do you offer printed invitation cards?', a: 'Yes — through our design partner. That is a separate service, priced by design and quantity. Just ask!' },
 ]
 
-const tiers = [
-  {
-    name: 'Standard',
-    tagline: 'the web invitation',
-    price: '1,999',
-    original: '2,999',
-    save: '1,000',
-    features: [
-      'Custom web invitation with its own link',
-      'Countdown, event details & venue map',
-      'Simple RSVP form',
-      'Photo gallery',
-      'One round of revisions',
-    ],
-    recommended: false,
-  },
-  {
-    name: 'Premium',
-    tagline: 'the full rsvp website',
-    price: '3,999',
-    original: '4,999',
-    save: '1,000',
-    features: [
-      'Everything in Standard',
-      'Live RSVP tracking dashboard',
-      'Song requests added by guests',
-      'Guest well-wishes wall',
-      'Unlimited revisions',
-    ],
-    recommended: true,
-  },
-]
 </script>
 
 <template>
@@ -140,9 +137,7 @@ const tiers = [
       <div class="absolute inset-0 bg-gradient-to-b from-sage-deep/85 via-sage-deep/70 to-sage-deep/90" aria-hidden="true" />
 
       <div class="relative mx-auto max-w-3xl px-6 py-28 text-center text-cream">
-        <p v-reveal class="font-script text-3xl text-cream/90 sm:text-4xl">Beautifully Invited</p>
-
-        <h1 v-reveal="100" class="mt-4 font-display text-5xl font-light leading-[1.05] tracking-tight sm:text-7xl">
+        <h1 v-reveal class="font-display text-5xl font-light leading-[1.05] tracking-tight sm:text-7xl">
           Invitations your guests<br class="hidden sm:block" />
           will never forget
         </h1>
@@ -154,9 +149,9 @@ const tiers = [
 
         <!-- Hooks: social proof + launch offer (slim single line) -->
         <p v-reveal="300" class="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs tracking-wide text-cream [text-shadow:0_1px_4px_rgb(0_0_0/0.6)]">
-          <span>★ Loved by 200+ celebrations</span>
+          <span>★ Loved by {{ stats[0].value }} celebrations</span>
           <span class="text-cream/50" aria-hidden="true">·</span>
-          <span class="font-medium text-[#e8b4ae]">❀ Launch offer — save up to ₱1,000</span>
+          <span class="font-medium text-[#e8b4ae]">❀ Launch offer — save up to ₱{{ launchOffer.saveUpTo }}</span>
         </p>
 
         <div v-reveal="400" class="mt-10 flex items-center justify-center gap-3 sm:gap-8">
@@ -194,17 +189,9 @@ const tiers = [
     <!-- ════════════ TRUST STRIP ════════════ -->
     <section id="more" class="border-y border-sage/15 bg-blush/40">
       <div v-reveal class="mx-auto grid max-w-4xl grid-cols-3 items-start divide-x divide-sage/20 px-2 py-8 text-center sm:gap-8 sm:px-6">
-        <div class="px-2">
-          <p class="font-display text-2xl text-sage-deep sm:text-3xl">200+</p>
-          <p class="mt-1 text-[0.6rem] uppercase tracking-[0.12em] text-bark/60 sm:text-xs sm:tracking-[0.2em]">celebrations made</p>
-        </div>
-        <div class="px-2">
-          <p class="font-display text-2xl text-sage-deep sm:text-3xl">3 days</p>
-          <p class="mt-1 text-[0.6rem] uppercase tracking-[0.12em] text-bark/60 sm:text-xs sm:tracking-[0.2em]">average turnaround</p>
-        </div>
-        <div class="px-2">
-          <p class="font-display text-2xl text-sage-deep sm:text-3xl">4.9 / 5</p>
-          <p class="mt-1 text-[0.6rem] uppercase tracking-[0.12em] text-bark/60 sm:text-xs sm:tracking-[0.2em]">client rating</p>
+        <div v-for="stat in stats" :key="stat.label" class="px-2">
+          <p class="font-display text-2xl text-sage-deep sm:text-3xl">{{ stat.value }}</p>
+          <p class="mt-1 text-[0.6rem] uppercase tracking-[0.12em] text-bark/60 sm:text-xs sm:tracking-[0.2em]">{{ stat.label }}</p>
         </div>
       </div>
     </section>
@@ -265,6 +252,42 @@ const tiers = [
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- ════════════ MADE JUST FOR YOU (customization) ════════════ -->
+    <section class="mx-auto max-w-5xl px-6 py-24 sm:py-28">
+      <div v-reveal class="mx-auto max-w-xl text-center">
+        <p class="font-script text-3xl text-rosedust">made just for you</p>
+        <h2 class="mt-2 font-display text-4xl font-light tracking-tight text-sage-deep sm:text-5xl">
+          Fully customized to your celebration
+        </h2>
+        <LeafDivider class="mx-auto mt-4 h-6 w-44 text-sage" />
+        <p class="mt-5 text-bark/75">
+          Nothing here is a fixed template. Every RSVP website is built around
+          <em class="not-italic text-rosedust">your</em> theme, your story, and exactly
+          the details you want to share.
+        </p>
+      </div>
+
+      <div class="mt-14 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
+        <div
+          v-for="(item, i) in customizable"
+          :key="item.title"
+          v-reveal="i * 80"
+          class="flex items-start gap-4"
+        >
+          <span class="mt-1 flex-none text-lg text-sage" aria-hidden="true">❀</span>
+          <div>
+            <h3 class="font-display text-xl text-sage-deep">{{ item.title }}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-bark/75">{{ item.desc }}</p>
+          </div>
+        </div>
+      </div>
+
+      <p v-reveal class="mx-auto mt-12 max-w-lg text-center font-script text-2xl text-rosedust">
+        you tell us your vision — we design it your way
+      </p>
+      <LeafDivider v-reveal class="mx-auto mt-8 h-6 w-44 text-sage" />
     </section>
 
     <!-- ════════════ FEATURED DEMOS ════════════ -->

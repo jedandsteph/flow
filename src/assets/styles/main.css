@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ── Design tokens (Editorial Elegant) ───────────────────────── */
+@theme {
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Parisienne", cursive;
+
+  /* Editorial Elegant */
+  --color-paper: #fdfbf6; /* lightest background  */
+  --color-ivory: #f6f1e7; /* warm section bg      */
+  --color-ink: #23201b; /* near-black text      */
+  --color-warm: #6f665a; /* muted body text      */
+  --color-gold: #a6824f; /* accent / hairlines   */
+  --color-goldline: #ddd0b9; /* faint rules          */
+
+  /* Romantic Botanical */
+  --color-cream: #faf6ef; /* soft background      */
+  --color-blush: #f0e2dc; /* section bg           */
+  --color-sage: #8c9a7d; /* primary accent       */
+  --color-sage-deep: #5d6b50; /* dark sage            */
+  --color-rosedust: #bf857f; /* secondary accent     */
+  --color-bark: #574f44; /* body text            */
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: hidden; /* walang horizontal scroll / side gaps */
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-bark);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Anchor offset para hindi matakpan ng fixed navbar ang section headings */
+:where(section[id]) {
+  scroll-margin-top: 5rem;
+}
+
+/* ── Scroll-reveal (v-reveal directive) ─────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Page transition (route change) ─────────────────────────── */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.4s ease;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+/* ── Scroll-down cue ────────────────────────────────────────── */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+.animate-bob {
+  animation: bob 1.8s ease-in-out infinite;
+}
+
+/* ── Hero Ken Burns slow zoom ───────────────────────────────── */
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate(-1.5%, -1.5%);
+  }
+}
+.animate-kenburns {
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+
+/* ── Respect reduced-motion preference ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-bob,
+  .animate-kenburns {
+    animation: none;
+  }
+}

@@ -3,7 +3,7 @@
 import { weddingDemo as d } from '@/data/demoInvitations'
 import CountdownTimer from '@/components/invitation/CountdownTimer.vue'
 import EventDetails from '@/components/invitation/EventDetails.vue'
-import MapEmbed from '@/components/invitation/MapEmbed.vue'
+import TimeAndPlace from '@/components/invitation/TimeAndPlace.vue'
 import EntourageList from '@/components/invitation/EntourageList.vue'
 import DressCode from '@/components/invitation/DressCode.vue'
 import PhotoGallery from '@/components/invitation/PhotoGallery.vue'
@@ -125,21 +125,8 @@ function scrollTo(id) {
       <EventDetails title="Order of Events" :items="d.program" accent-class="text-rosedust" />
     </div>
 
-    <!-- Ceremony -->
-    <section class="px-6 py-16">
-      <h2 v-reveal class="mb-10 text-center font-display text-4xl font-light text-sage-deep">The Ceremony</h2>
-      <div v-reveal="100" class="mx-auto max-w-2xl">
-        <MapEmbed :query="d.venue.mapQuery" :venue-name="d.venue.name" :address="d.venue.address" />
-      </div>
-    </section>
-
-    <!-- Reception -->
-    <section class="bg-blush/30 px-6 py-16">
-      <h2 v-reveal class="mb-10 text-center font-display text-4xl font-light text-sage-deep">The Reception</h2>
-      <div v-reveal="100" class="mx-auto max-w-2xl">
-        <MapEmbed :query="d.reception.mapQuery" :venue-name="d.reception.name" :address="d.reception.address" />
-      </div>
-    </section>
+    <!-- Time & Place (event cards + modal) -->
+    <TimeAndPlace :bg-image="d.timeAndPlace.bgImage" :events="d.timeAndPlace.events" />
 
     <!-- Attire -->
     <section class="py-16">

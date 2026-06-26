@@ -23,6 +23,13 @@ const weddingDate = upcoming(180, 15) // ~6 buwan mula ngayon, 3:00 PM
 const debutDate = upcoming(95, 18) // ~3 buwan mula ngayon, 6:00 PM
 const birthdayDate = upcoming(50, 14) // ~7 linggo mula ngayon, 2:00 PM
 
+const weddingDateText = weddingDate.toLocaleDateString('en-US', {
+  weekday: 'long',
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+})
+
 export const weddingDemo = {
   slug: 'wedding',
   couple: 'Juan & Maria',
@@ -39,6 +46,35 @@ export const weddingDemo = {
     name: 'The Blue Leaf Cosmopolitan',
     address: 'Aseana Ave, Parañaque City',
     mapQuery: 'The Blue Leaf Cosmopolitan Aseana Paranaque',
+  },
+  timeAndPlace: {
+    bgImage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1600&q=75&auto=format&fit=crop',
+    events: [
+      {
+        title: 'The Ceremony',
+        image: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=70&auto=format&fit=crop',
+        datetime: `${weddingDateText} · 3:00 PM`,
+        venue: 'San Agustin Church',
+        address: 'Intramuros, Manila',
+        mapQuery: 'San Agustin Church Intramuros Manila',
+      },
+      {
+        title: 'The Reception',
+        image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=70&auto=format&fit=crop',
+        datetime: `${weddingDateText} · 6:30 PM`,
+        venue: 'The Blue Leaf Cosmopolitan',
+        address: 'Aseana Ave, Parañaque City',
+        mapQuery: 'The Blue Leaf Cosmopolitan Aseana Paranaque',
+      },
+      {
+        title: 'The Celebration',
+        image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=70&auto=format&fit=crop',
+        datetime: `${weddingDateText} · 8:00 PM`,
+        venue: 'Grand Ballroom',
+        address: 'The Blue Leaf Cosmopolitan',
+        mapQuery: 'The Blue Leaf Cosmopolitan Aseana Paranaque',
+      },
+    ],
   },
   program: [
     { time: '3:00 PM', title: 'Wedding Ceremony' },
